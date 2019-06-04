@@ -22,6 +22,15 @@ Or clone the repo:
     $ git clone https://github.com/orenovadia/pandas_explode.git
     $ python setup.py install
     
+Publishing
+----------
+
+    $ python setup.py clean
+    $ python setup.py build sdist
+    $ twine upload dist/*
+
+TBD
+
 Contributing
 ------------
 
