@@ -1,13 +1,12 @@
 pandas_explode
 ===============================
 
-version number: 0.0.1
 author: Oren Ovadia
 
 Overview
 --------
 
-Explode utility for Pandas dataframes (similar to UNNEST or explode in Spark)
+Explode utility for Pandas dataframes (similar to `UNNEST` or `explode`)
 
 
 Example
