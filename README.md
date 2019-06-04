@@ -13,20 +13,22 @@ Explode utility for Pandas dataframes (similar to UNNEST or explode in Spark)
 Example
 -------
 
-```
->>> df = pd.DataFrame({'s': ['a', 'b', 'c'], 'values': [[1, 2], [3, 4, 5], []]})
->>> df
-   s     values
-0  a     [1, 2]
-1  b  [3, 4, 5]
-2  c         []
->>> explode(df, 'values')
-   s  values
-0  a       1
-0  a       2
-1  b       3
-1  b       4
-1  b       5
+```python
+import pandas as pd 
+from pandas_explode import explode
+df = pd.DataFrame({'s': ['a', 'b', 'c'], 'values': [[1, 2], [3, 4, 5], []]})
+df
+#    s     values
+# 0  a     [1, 2]
+# 1  b  [3, 4, 5]
+# 2  c         []
+explode(df, 'values')
+#    s  values
+# 0  a       1
+# 0  a       2
+# 1  b       3
+# 1  b       4
+# 1  b       5
 
 ```
 
