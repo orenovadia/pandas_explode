@@ -27,14 +27,23 @@ Publishing
 
     $ ./publish.sh
 
-TBD
-
-Contributing
-------------
-
-TBD
 
 Example
 -------
 
-TBD
+```
+>>> df = pd.DataFrame({'s': ['a', 'b', 'c'], 'values': [[1, 2], [3, 4, 5], []]})
+>>> df
+   s     values
+0  a     [1, 2]
+1  b  [3, 4, 5]
+2  c         []
+>>> explode(df, 'values')
+   s  values
+0  a       1
+0  a       2
+1  b       3
+1  b       4
+1  b       5
+
+```
