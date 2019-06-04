@@ -25,9 +25,7 @@ Or clone the repo:
 Publishing
 ----------
 
-    $ python setup.py clean
-    $ python setup.py build sdist
-    $ twine upload dist/*
+    $ ./publish.sh
 
 TBD
 
