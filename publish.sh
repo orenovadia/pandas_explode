@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -ex
-python setup.py clean ; rm -r dist
+python setup.py clean ; rm -rf dist || true
 python setup.py build sdist
-twine upload dist/*
+twine upload --verbose dist/*
