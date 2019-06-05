@@ -14,14 +14,16 @@ Example
 
 ```python
 import pandas as pd 
-from pandas_explode import explode
+import pandas_explode 
+pandas_explode.patch() # adds a `df.explode` method to all DataFrames 
+
 df = pd.DataFrame({'s': ['a', 'b', 'c'], 'values': [[1, 2], [3, 4, 5], []]})
 df
 #    s     values
 # 0  a     [1, 2]
 # 1  b  [3, 4, 5]
 # 2  c         []
-explode(df, 'values')
+df.explode('values')
 #    s  values
 # 0  a       1
 # 0  a       2

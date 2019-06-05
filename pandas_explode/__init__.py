@@ -31,6 +31,20 @@ def explode(df, column):
                         )
 
 
+def patch():
+    """
+    Patch `pandas.Dataframe` with an `explode` method:
+    >>> df = pd.DataFrame([{'s': 'a', 'values': [1, 2]}])
+    >>> patch()
+    >>> df.explode('values')
+       s  values
+    0  a       1
+    0  a       2
+
+    """
+    pd.DataFrame.explode = explode
+
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod()
