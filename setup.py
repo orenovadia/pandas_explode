@@ -19,7 +19,7 @@ dependency_links = [x.strip().replace('git+', '') for x in all_reqs if x.startsw
 setup(
     name='pandas_explode',
     version=__version__,
-    description='Explode utility for Pandas dataframes (similar to UNNEST or explode in Spark)',
+    description='Explode utility for Pandas dataframes (similar to `UNNEST` or `explode`)',
     long_description=long_description,
     url='https://github.com/orenovadia/pandas_explode',
     download_url='https://github.com/orenovadia/pandas_explode/tarball/' + __version__,
