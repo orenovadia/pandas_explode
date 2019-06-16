@@ -1,16 +1,13 @@
-pandas_explode
-===============================
+# pandas_explode
 
 author: Oren Ovadia
 
-Overview
---------
+## Overview
 
 Explode utility for Pandas dataframes (similar to `UNNEST` or `explode`)
 
 
-Example
--------
+## Examples
 
 ```python
 import pandas as pd 
@@ -31,11 +28,22 @@ df.explode('values')
 # 1  b       4
 # 1  b       5
 
+df = pd.DataFrame({'s': ['a', 'b', 'c'], 'values': [{'col1': 1, 'col2': 2}, {'col1': 10, 'col3': 20}, {'col2': 2}]})
+df
+#    s                    values
+# 0  a    {'col1': 1, 'col2': 2}
+# 1  b  {'col1': 10, 'col3': 20}
+# 2  c               {'col2': 2}
+df.explode('values', axis=1)
+#    s  col1  col2  col3
+# 0  a   1.0   2.0   NaN
+# 1  b  10.0   NaN  20.0
+# 2  c   NaN   2.0   NaN
+
 ```
 
 
-Installation / Usage
---------------------
+## Installation / Usage
 
 To install use pip:
 
@@ -48,7 +56,6 @@ Or clone the repo:
     $ python setup.py install
     
 
-Publishing
-----------
+## Publishing
 
     $ ./publish.sh
