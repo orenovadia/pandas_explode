@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/orenovadia/pandas_explode.svg?branch=master)](https://travis-ci.org/orenovadia/pandas_explode)
+
 # pandas_explode
 
 author: Oren Ovadia
