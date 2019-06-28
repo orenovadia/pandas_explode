@@ -56,7 +56,6 @@ def explode(df, column, axis=0, record_prefix=None, sep='.'):
                         )
 
     def explode_columns(df, column):
-        print(sep)
         return pd.concat((df.drop(columns=column), df[column].apply(pd.Series)\
                         .rename(lambda x: column + sep + x if record_prefix else x, axis='columns')\
                         ), axis=1)
