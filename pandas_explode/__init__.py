@@ -1,13 +1,18 @@
 import pandas as pd
 
 
-def explode(df, column, axis=0):
+def explode(df, column, axis=0, record_prefix=None, sep='.'):
     """
 
     :param df: Dataframe
     :param column: Column of sequences to explode
     :param axis : {0/'index', 1/'columns'}, default 0
         The axis to concatenate along
+    :param record_prefix :  the prefix, optional, default: ""
+    :param sep : string, default '.'
+        Nested records will generate names separated by sep,
+        e.g., for sep='.', { 'foo' : { 'bar' : 0 } } -> foo.bar
+
     >>> df = pd.DataFrame({'s': ['a', 'b', 'c'], 'values': [[1, 2], [3, 4, 5], []]})
     >>> df
        s     values
@@ -32,6 +37,11 @@ def explode(df, column, axis=0):
     0  a   1.0   2.0   NaN
     1  b  10.0   NaN  20.0
     2  c   NaN   2.0   NaN
+    >>> df.explode('values', axis=1, record_prefix=True)
+    s  values.col1  values.col2  values.col3
+    0  a          1.0          2.0          NaN
+    1  b         10.0          NaN         20.0
+    2  c          NaN          2.0          NaN
 
     """
 
@@ -46,7 +56,11 @@ def explode(df, column, axis=0):
                         )
 
     def explode_columns(df, column):
-        return pd.concat((df.drop(columns=column), df[column].apply(pd.Series)), axis=1)
+        print(sep)
+        return pd.concat((df.drop(columns=column), df[column].apply(pd.Series)\
+                        .rename(lambda x: column + sep + x if record_prefix else x, axis='columns')\
+                        ), axis=1)
+        
 
     # Standardize axis parameter to int
     if not isinstance(df, pd.DataFrame):
@@ -58,6 +72,10 @@ def explode(df, column, axis=0):
     if not 0 <= axis <= 1:
         raise AssertionError("axis must be either 0 ('index') or 1 ('columns'), input was"
                              " {axis}".format(axis=axis))
+    
+    if axis==0 and record_prefix is True:
+        raise ValueError('Conflicting axis for name {name}, '
+                             'use axis=1 instead '.format(name=column))
 
     result = explode_rows(df, column) if axis==0 else explode_columns(df, column)
     return result

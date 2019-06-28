@@ -41,6 +41,11 @@ df.explode('values', axis=1)
 # 0  a   1.0   2.0   NaN
 # 1  b  10.0   NaN  20.0
 # 2  c   NaN   2.0   NaN
+df.explode('values', axis=1, record_prefix=True)
+#    s  values.col1  values.col2  values.col3
+# 0  a          1.0          2.0          NaN
+# 1  b         10.0          NaN         20.0
+# 2  c          NaN          2.0          NaN
 
 ```
 

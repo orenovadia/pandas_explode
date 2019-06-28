@@ -19,3 +19,19 @@ class ExplodeTests(TestCase):
         })
         exploded_df = explode(df, 'values', axis=1)
         self.assertSequenceEqual(['col1', 'col2', 'col3', 's'], sorted(exploded_df.columns))
+    
+    def test_col_explosion_prefix(self):
+        df = pd.DataFrame({
+            's': ['a', 'b', 'c'],
+            'values': [{'col1': 1, 'col2': 2}, {'col1': 10, 'col3': 20}, {'col2': 2}],
+        })
+        exploded_df = explode(df, 'values', axis=1, record_prefix=True)
+        self.assertSequenceEqual(['s', 'values.col1', 'values.col2', 'values.col3',], sorted(exploded_df.columns))
+    
+    def test_col_explosion_prefix_sep(self):
+        df = pd.DataFrame({
+            's': ['a', 'b', 'c'],
+            'values': [{'col1': 1, 'col2': 2}, {'col1': 10, 'col3': 20}, {'col2': 2}],
+        })
+        exploded_df = explode(df, 'values', axis=1, record_prefix=True, sep='*')
+        self.assertSequenceEqual(['s', 'values*col1', 'values*col2', 'values*col3',], sorted(exploded_df.columns))
